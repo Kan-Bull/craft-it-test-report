@@ -1,0 +1,45 @@
+{
+  "name": "craft-it-test-report",
+  "version": "1.0.0",
+  "description": "Custom Playwright test reporter with HTML reports and PDF export",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "craft-report": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "mkdir -p dist/html && cp src/html/* dist/html/",
+    "watch": "tsc --watch",
+    "test": "playwright test --config=example/playwright.config.ts",
+    "pdf": "node dist/index.js pdf",
+    "report": "npx craft-report pdf ./craft-report/report.html -o report.pdf"
+  },
+  "keywords": [
+    "playwright",
+    "test",
+    "reporter",
+    "html",
+    "pdf",
+    "report"
+  ],
+  "author": "Quentin Goossens",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "puppeteer": "^23.10.1"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  },
+  "files": [
+    "dist",
+    "src/html"
+  ]
+}
