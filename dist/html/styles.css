@@ -240,7 +240,7 @@ body {
 .col-name { min-width: 200px; }
 .col-description { min-width: 150px; }
 .col-metadata { min-width: 120px; }
-.col-duration { width: 80px; }
+.col-duration { width: 100px; white-space: nowrap; }
 .col-error { min-width: 200px; }
 .col-comment { min-width: 180px; }
 
@@ -272,10 +272,7 @@ body {
 }
 
 .test-id {
-  font-size: 12px;
-  color: var(--color-text-muted);
-  font-family: monospace;
-  margin-top: 4px;
+  display: none;
 }
 
 /* Metadata Tags */
@@ -448,10 +445,6 @@ body {
     font-size: 9px;
   }
 
-  .test-id {
-    font-size: 8px;
-  }
-
   .status-badge {
     padding: 2px 6px;
     font-size: 8px;
@@ -470,8 +463,8 @@ body {
   .error-cell pre {
     font-size: 7px;
     padding: 6px;
-    max-height: none;
-    overflow: visible;
+    max-height: 80px;
+    overflow: hidden;
     white-space: pre-wrap;
     word-break: break-word;
   }
