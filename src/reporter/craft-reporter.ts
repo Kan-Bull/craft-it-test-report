@@ -50,7 +50,13 @@ class CraftReporter implements Reporter {
       retries: result.retry
     };
 
-    this.tests.push(entry);
+    // Replace existing test entry if this is a retry (keep only the latest run)
+    const existingIndex = this.tests.findIndex(t => t.testId === test.id);
+    if (existingIndex !== -1) {
+      this.tests[existingIndex] = entry;
+    } else {
+      this.tests.push(entry);
+    }
 
     // Log progress
     const statusSymbol = result.status === 'passed' ? '✓' : result.status === 'failed' ? '✗' : '○';

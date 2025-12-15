@@ -1,143 +1,532 @@
 {
-  "timestamp": "2025-12-10T14:34:29.172Z",
-  "totalTests": 7,
-  "passed": 5,
-  "failed": 1,
-  "skipped": 1,
-  "duration": 1502,
+  "timestamp": "2025-12-15T13:36:25.067Z",
+  "totalTests": 31,
+  "passed": 25,
+  "failed": 3,
+  "skipped": 3,
+  "duration": 2821,
   "tests": [
     {
-      "testId": "a30a6eba6312f6b87ea5-c9a810945fab60756a4b",
-      "name": "Widget data refreshes automatically",
-      "fullTitle": " > chromium > example.spec.ts > Dashboard > Widget data refreshes automatically",
-      "status": "skipped",
-      "duration": 0,
-      "metadata": {
-        "epic": "Dashboard",
-        "feature": "Widgets",
-        "severity": "minor",
-        "owner": "Quentin Goossens",
-        "description": "Verifies widgets auto-refresh with new data",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
-      },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 80,
-      "startTime": "2025-12-10T14:34:27.671Z",
-      "retries": 0
-    },
-    {
-      "testId": "a30a6eba6312f6b87ea5-9b244e8d0a96d5861834",
-      "name": "Export report to CSV",
-      "fullTitle": " > chromium > example.spec.ts > Reporting > Export report to CSV",
+      "testId": "90cda532ab82d274b30b-6591275a1a2e04c5cde7",
+      "name": "Widget data auto-refreshes at configured interval",
+      "fullTitle": " > chromium > dashboard.spec.ts > Dashboard > Widget data auto-refreshes at configured interval",
       "status": "passed",
-      "duration": 778,
+      "duration": 421,
       "metadata": {
-        "epic": "Reporting",
-        "feature": "Export",
-        "severity": "normal",
-        "owner": "team-reports",
+        "epic": "Workflow",
+        "feature": "Dashboard",
+        "suite": "Widget Display",
+        "subSuite": "E2E",
+        "description": "Verifies widget data refreshes automatically without page reload.",
         "tags": [
-          "export",
-          "csv"
+          "dashboard",
+          "refresh"
         ],
-        "description": "Verifies CSV export generates valid file",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
+        "severity": "normal",
+        "owner": "Emma",
+        "parentSuite": ""
       },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 110,
-      "startTime": "2025-12-10T14:34:27.959Z",
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/dashboard.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:22.544Z",
       "retries": 0
     },
     {
-      "testId": "a30a6eba6312f6b87ea5-b196598f166034849268",
-      "name": "Export report to PDF",
-      "fullTitle": " > chromium > example.spec.ts > Reporting > Export report to PDF",
+      "testId": "70f6afe7e350c931056e-946f9f260c90b5ea2776",
+      "name": "User can login with valid credentials",
+      "fullTitle": " > chromium > authentication.spec.ts > Authentication > User can login with valid credentials",
       "status": "passed",
-      "duration": 778,
+      "duration": 415,
       "metadata": {
-        "epic": "Reporting",
-        "feature": "Export",
-        "severity": "normal",
-        "owner": "team-reports",
+        "epic": "E2E Critical Scenarios",
+        "feature": "Authentication",
+        "suite": "Login Flow",
+        "subSuite": "E2E",
+        "description": "Verifies that users can successfully authenticate with valid username and password.",
+        "tags": [
+          "auth",
+          "ui"
+        ],
+        "severity": "blocker",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/authentication.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:22.543Z",
+      "retries": 0
+    },
+    {
+      "testId": "70f6afe7e350c931056e-1baf4db5fbc88c7f4886",
+      "name": "Session expires after inactivity timeout",
+      "fullTitle": " > chromium > authentication.spec.ts > Authentication > Session expires after inactivity timeout",
+      "status": "passed",
+      "duration": 443,
+      "metadata": {
+        "epic": "Security",
+        "feature": "Authentication",
+        "suite": "Session Management",
+        "subSuite": "E2E",
+        "description": "Verifies that user session expires after configured inactivity period.",
+        "tags": [
+          "auth",
+          "security"
+        ],
+        "severity": "critical",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/authentication.spec.ts",
+      "line": 40,
+      "startTime": "2025-12-15T13:36:22.544Z",
+      "retries": 0
+    },
+    {
+      "testId": "0549c65d315e06777d95-fd05e895d06790bf134a",
+      "name": "Export to PDF generates valid document",
+      "fullTitle": " > chromium > data-export.spec.ts > Data Export > Export to PDF generates valid document",
+      "status": "passed",
+      "duration": 453,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Data Export",
+        "suite": "Export Formats",
+        "subSuite": "E2E",
+        "description": "Verifies PDF export produces valid, downloadable document.",
         "tags": [
           "export",
           "pdf"
         ],
-        "description": "Verifies PDF export generates valid document",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
-      },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 95,
-      "startTime": "2025-12-10T14:34:27.957Z",
-      "retries": 0
-    },
-    {
-      "testId": "a30a6eba6312f6b87ea5-bab369f6671d6810f80d",
-      "name": "User can login with valid credentials",
-      "fullTitle": " > chromium > example.spec.ts > Authentication > User can login with valid credentials",
-      "status": "passed",
-      "duration": 779,
-      "metadata": {
-        "epic": "Authentication",
-        "feature": "Login",
         "severity": "critical",
-        "owner": "team-auth",
-        "tags": [
-          "smoke",
-          "regression"
-        ],
-        "description": "Verifies that users can log in with valid credentials",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
+        "owner": "Quentin",
+        "parentSuite": ""
       },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 32,
-      "startTime": "2025-12-10T14:34:27.946Z",
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/data-export.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:22.532Z",
       "retries": 0
     },
     {
-      "testId": "a30a6eba6312f6b87ea5-c1d7fa7de172709adf35",
-      "name": "Dashboard loads within 3 seconds",
-      "fullTitle": " > chromium > example.spec.ts > Dashboard > Dashboard loads within 3 seconds",
+      "testId": "90cda532ab82d274b30b-867a36620f0a6df45eba",
+      "name": "All dashboard widgets render correctly",
+      "fullTitle": " > chromium > dashboard.spec.ts > Dashboard > All dashboard widgets render correctly",
       "status": "passed",
-      "duration": 782,
+      "duration": 469,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Dashboard",
+        "suite": "Widget Display",
+        "subSuite": "E2E",
+        "description": "Verifies all configured widgets are visible and display data.",
+        "tags": [
+          "dashboard",
+          "widgets",
+          "ui"
+        ],
+        "severity": "critical",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/dashboard.spec.ts",
+      "line": 21,
+      "startTime": "2025-12-15T13:36:22.539Z",
+      "retries": 0
+    },
+    {
+      "testId": "90cda532ab82d274b30b-e08ae2175dc95808ab0d",
+      "name": "Dashboard loads within performance threshold",
+      "fullTitle": " > chromium > dashboard.spec.ts > Dashboard > Dashboard loads within performance threshold",
+      "status": "passed",
+      "duration": 442,
       "metadata": {
         "epic": "Performance",
         "feature": "Dashboard",
-        "severity": "normal",
-        "owner": "team-frontend",
+        "suite": "Page Load",
+        "subSuite": "E2E",
+        "description": "Verifies dashboard page loads within 3 second threshold.",
         "tags": [
-          "performance"
+          "performance",
+          "ui"
         ],
-        "description": "Ensures dashboard loads within acceptable time threshold",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
+        "severity": "critical",
+        "owner": "Quentin",
+        "parentSuite": ""
       },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 65,
-      "startTime": "2025-12-10T14:34:27.953Z",
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/dashboard.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:22.540Z",
       "retries": 0
     },
     {
-      "testId": "a30a6eba6312f6b87ea5-f6fbf06ed542ebfa7d67",
-      "name": "Validates that GUP Final PD is correctly calculated and displayed on the Summary page",
-      "fullTitle": " > chromium > example.spec.ts > LCPD : GUP Final PD surfaced on Summary > Validates that GUP Final PD is correctly calculated and displayed on the Summary page",
+      "testId": "70f6afe7e350c931056e-f8cba80c73315227ee8f",
+      "name": "User sees error message with invalid credentials",
+      "fullTitle": " > chromium > authentication.spec.ts > Authentication > User sees error message with invalid credentials",
+      "status": "failed",
+      "duration": 474,
+      "errorTrace": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\nError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at /Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/authentication.spec.ts:37:18",
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "Authentication",
+        "suite": "Login Flow",
+        "subSuite": "E2E",
+        "description": "Verifies that appropriate error message is displayed when login fails.",
+        "tags": [
+          "auth",
+          "ui",
+          "negative"
+        ],
+        "severity": "critical",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/authentication.spec.ts",
+      "line": 21,
+      "startTime": "2025-12-15T13:36:22.540Z",
+      "retries": 0
+    },
+    {
+      "testId": "0549c65d315e06777d95-071f80d707b33ee10b0c",
+      "name": "Export to Excel includes all columns",
+      "fullTitle": " > chromium > data-export.spec.ts > Data Export > Export to Excel includes all columns",
       "status": "passed",
-      "duration": 796,
+      "duration": 360,
       "metadata": {
         "epic": "Workflow",
-        "feature": "GUP in Summary",
-        "parentSuite": "E2E-Scenarios",
+        "feature": "Data Export",
+        "suite": "Export Formats",
+        "subSuite": "E2E",
+        "description": "Verifies Excel export contains all visible table columns.",
+        "tags": [
+          "export",
+          "excel"
+        ],
+        "severity": "critical",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/data-export.spec.ts",
+      "line": 21,
+      "startTime": "2025-12-15T13:36:23.179Z",
+      "retries": 0
+    },
+    {
+      "testId": "0549c65d315e06777d95-169fa1cc63aa63658f42",
+      "name": "Export respects applied filters",
+      "fullTitle": " > chromium > data-export.spec.ts > Data Export > Export respects applied filters",
+      "status": "passed",
+      "duration": 341,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Data Export",
+        "suite": "Export Formats",
+        "subSuite": "E2E",
+        "description": "Verifies exported data only includes filtered results.",
+        "tags": [
+          "export",
+          "filters"
+        ],
+        "severity": "normal",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/data-export.spec.ts",
+      "line": 38,
+      "startTime": "2025-12-15T13:36:23.199Z",
+      "retries": 0
+    },
+    {
+      "testId": "9245d37f6983c02d8645-c70613ad40f221bc3f5b",
+      "name": "Search returns matching entities",
+      "fullTitle": " > chromium > entity-search.spec.ts > Entity Search > Search returns matching entities",
+      "status": "passed",
+      "duration": 357,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "Entity Search",
+        "suite": "Search Functionality",
+        "subSuite": "E2E",
+        "description": "Verifies search returns all entities matching the query criteria.",
+        "tags": [
+          "search",
+          "entity",
+          "ui"
+        ],
+        "severity": "blocker",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/entity-search.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.200Z",
+      "retries": 0
+    },
+    {
+      "testId": "9245d37f6983c02d8645-abd1fdab2027bd8f9ec8",
+      "name": "Advanced filters narrow search results",
+      "fullTitle": " > chromium > entity-search.spec.ts > Entity Search > Advanced filters narrow search results",
+      "status": "passed",
+      "duration": 369,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Entity Search",
+        "suite": "Search Functionality",
+        "subSuite": "E2E",
+        "description": "Verifies advanced filter options correctly filter search results.",
+        "tags": [
+          "search",
+          "filters"
+        ],
+        "severity": "critical",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/entity-search.spec.ts",
+      "line": 22,
+      "startTime": "2025-12-15T13:36:23.216Z",
+      "retries": 0
+    },
+    {
+      "testId": "0a12ca241492fbbc1ff4-7a668201fb1981f38ced",
+      "name": "Historical scorecard data loads correctly",
+      "fullTitle": " > chromium > lcpd-scorecard.spec.ts > LCPD Scorecard > Historical scorecard data loads correctly",
+      "status": "skipped",
+      "duration": 0,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Risk Assessment",
         "suite": "LCPD Scorecard",
-        "subSuite": "UI",
+        "subSuite": "E2E",
+        "description": "Verifies historical scorecard data can be viewed and compared.",
+        "tags": [
+          "LCPD",
+          "history"
+        ],
+        "severity": "normal",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/lcpd-scorecard.spec.ts",
+      "line": 40,
+      "startTime": "2025-12-15T13:36:23.594Z",
+      "retries": 0
+    },
+    {
+      "testId": "59ee17b36fa319269327-b468cc873dc20d0692aa",
+      "name": "GUP Final PD is correctly calculated and displayed",
+      "fullTitle": " > chromium > gup-summary.spec.ts > GUP Summary Page > GUP Final PD is correctly calculated and displayed",
+      "status": "passed",
+      "duration": 362,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "GUP in Summary",
+        "suite": "LCPD Scorecard",
+        "subSuite": "E2E",
+        "description": "Verifies that GUP Final PD is correctly calculated and displayed on the Summary page for GUP entities.",
+        "tags": [
+          "GUP",
+          "ui"
+        ],
+        "severity": "blocker",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/gup-summary.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.224Z",
+      "retries": 0
+    },
+    {
+      "testId": "9245d37f6983c02d8645-cfb822b972d870acdeca",
+      "name": "Search handles special characters correctly",
+      "fullTitle": " > chromium > entity-search.spec.ts > Entity Search > Search handles special characters correctly",
+      "status": "failed",
+      "duration": 351,
+      "errorTrace": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"test\"\u001b[39m\nReceived: \u001b[31m\"test\u001b[7m&special\u001b[27m\"\u001b[39m\nError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"test\"\u001b[39m\nReceived: \u001b[31m\"test\u001b[7m&special\u001b[27m\"\u001b[39m\n    at /Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/entity-search.spec.ts:54:28",
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Entity Search",
+        "suite": "Search Functionality",
+        "subSuite": "E2E",
+        "description": "Verifies search correctly handles special characters and unicode.",
+        "tags": [
+          "search",
+          "edge-case"
+        ],
+        "severity": "minor",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/entity-search.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:23.224Z",
+      "retries": 0
+    },
+    {
+      "testId": "59ee17b36fa319269327-8cba642f1f5446452918",
+      "name": "GUP data refreshes when entity changes",
+      "fullTitle": " > chromium > gup-summary.spec.ts > GUP Summary Page > GUP data refreshes when entity changes",
+      "status": "passed",
+      "duration": 331,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "GUP in Summary",
+        "suite": "LCPD Scorecard",
+        "subSuite": "E2E",
+        "description": "Verifies GUP data updates correctly when switching between entities.",
+        "tags": [
+          "GUP",
+          "ui"
+        ],
+        "severity": "critical",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/gup-summary.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:23.546Z",
+      "retries": 0
+    },
+    {
+      "testId": "0a12ca241492fbbc1ff4-e0cc772ccaee30ee17bd",
+      "name": "Scorecard calculations match backend values",
+      "fullTitle": " > chromium > lcpd-scorecard.spec.ts > LCPD Scorecard > Scorecard calculations match backend values",
+      "status": "passed",
+      "duration": 344,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "Risk Assessment",
+        "suite": "LCPD Scorecard",
+        "subSuite": "E2E",
+        "description": "Verifies frontend scorecard values match API response data.",
+        "tags": [
+          "LCPD",
+          "api",
+          "integration"
+        ],
+        "severity": "blocker",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/lcpd-scorecard.spec.ts",
+      "line": 22,
+      "startTime": "2025-12-15T13:36:23.565Z",
+      "retries": 0
+    },
+    {
+      "testId": "be7d0958780d1a4666e5-31ca9b293111652f9286",
+      "name": "User receives real-time notifications",
+      "fullTitle": " > chromium > notifications.spec.ts > Notifications > User receives real-time notifications",
+      "status": "passed",
+      "duration": 332,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Notifications",
+        "suite": "Real-time Updates",
+        "subSuite": "E2E",
+        "description": "Verifies notifications appear in real-time without page refresh.",
+        "tags": [
+          "notifications",
+          "websocket",
+          "ui"
+        ],
+        "severity": "critical",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/notifications.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.598Z",
+      "retries": 0
+    },
+    {
+      "testId": "0a12ca241492fbbc1ff4-2989d161d60f9f65f501",
+      "name": "Scorecard displays correct risk ratings",
+      "fullTitle": " > chromium > lcpd-scorecard.spec.ts > LCPD Scorecard > Scorecard displays correct risk ratings",
+      "status": "passed",
+      "duration": 389,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "Risk Assessment",
+        "suite": "LCPD Scorecard",
+        "subSuite": "E2E",
+        "description": "Verifies that LCPD scorecard shows accurate risk ratings for all categories.",
+        "tags": [
+          "LCPD",
+          "risk",
+          "ui"
+        ],
+        "severity": "blocker",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/lcpd-scorecard.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.547Z",
+      "retries": 0
+    },
+    {
+      "testId": "d2ea609703bae19dcdce-0e9b1ae0965d57bb69be",
+      "name": "Report data caching improves performance",
+      "fullTitle": " > chromium > reports.spec.ts > Report Generation > Report data caching improves performance",
+      "status": "skipped",
+      "duration": 0,
+      "metadata": {
+        "epic": "Performance",
+        "feature": "Reporting",
+        "suite": "Optimization",
+        "subSuite": "E2E",
+        "description": "Verifies report caching reduces load time on repeated access.",
+        "tags": [
+          "reports",
+          "performance",
+          "cache"
+        ],
+        "severity": "minor",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/reports.spec.ts",
+      "line": 57,
+      "startTime": "2025-12-15T13:36:23.942Z",
+      "retries": 0
+    },
+    {
+      "testId": "be7d0958780d1a4666e5-a8c6f5f998a6fd2dc039",
+      "name": "Notification preferences are saved correctly",
+      "fullTitle": " > chromium > notifications.spec.ts > Notifications > Notification preferences are saved correctly",
+      "status": "passed",
+      "duration": 376,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Notifications",
+        "suite": "Preferences",
+        "subSuite": "E2E",
+        "description": "Verifies user notification preferences persist across sessions.",
+        "tags": [
+          "notifications",
+          "settings"
+        ],
+        "severity": "normal",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/notifications.spec.ts",
+      "line": 22,
+      "startTime": "2025-12-15T13:36:23.599Z",
+      "retries": 0
+    },
+    {
+      "testId": "59ee17b36fa319269327-c1b4d8e211eac28214b4",
+      "name": "Summary page displays all GUP metrics",
+      "fullTitle": " > chromium > gup-summary.spec.ts > GUP Summary Page > Summary page displays all GUP metrics",
+      "status": "passed",
+      "duration": 547,
+      "metadata": {
+        "epic": "E2E Critical Scenarios",
+        "feature": "GUP in Summary",
+        "suite": "LCPD Scorecard",
+        "subSuite": "E2E",
+        "description": "Verifies all required GUP metrics are visible on the Summary page.",
         "tags": [
           "GUP",
           "Summary",
@@ -145,36 +534,268 @@
         ],
         "severity": "blocker",
         "owner": "Quentin",
-        "description": "Verifies that GUP Final PD is correctly calculated and displayed on the Summary page for GUP entities."
+        "parentSuite": ""
       },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 10,
-      "startTime": "2025-12-10T14:34:27.956Z",
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/gup-summary.spec.ts",
+      "line": 21,
+      "startTime": "2025-12-15T13:36:23.480Z",
       "retries": 0
     },
     {
-      "testId": "a30a6eba6312f6b87ea5-ec63de19f930fac2dd3e",
-      "name": "User sees error with invalid credentials",
-      "fullTitle": " > chromium > example.spec.ts > Authentication > User sees error with invalid credentials",
-      "status": "failed",
-      "duration": 811,
-      "errorTrace": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\nError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at /Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts:60:18",
+      "testId": "d2ea609703bae19dcdce-362ea0834973ba19c9b1",
+      "name": "Scheduled reports run at configured time",
+      "fullTitle": " > chromium > reports.spec.ts > Report Generation > Scheduled reports run at configured time",
+      "status": "passed",
+      "duration": 534,
       "metadata": {
-        "epic": "Authentication",
-        "feature": "Login",
-        "severity": "critical",
-        "owner": "team-auth",
+        "epic": "E2E Critical Scenarios",
+        "feature": "Reporting",
+        "suite": "Scheduled Reports",
+        "subSuite": "E2E",
+        "description": "Verifies scheduled reports execute at the configured time.",
         "tags": [
-          "negative"
+          "reports",
+          "scheduler"
         ],
-        "description": "Verifies that appropriate error message is shown for invalid credentials",
-        "parentSuite": "",
-        "suite": "chromium",
-        "subSuite": "example.spec.ts"
+        "severity": "blocker",
+        "owner": "Quentin",
+        "parentSuite": ""
       },
-      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/example.spec.ts",
-      "line": 48,
-      "startTime": "2025-12-10T14:34:27.957Z",
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/reports.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.883Z",
+      "retries": 0
+    },
+    {
+      "testId": "d2ea609703bae19dcdce-7a0064e447ef9bf4ba62",
+      "name": "Custom report templates render correctly",
+      "fullTitle": " > chromium > reports.spec.ts > Report Generation > Custom report templates render correctly",
+      "status": "passed",
+      "duration": 512,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Reporting",
+        "suite": "Custom Templates",
+        "subSuite": "E2E",
+        "description": "Verifies custom report templates produce expected output.",
+        "tags": [
+          "reports",
+          "templates",
+          "ui"
+        ],
+        "severity": "critical",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/reports.spec.ts",
+      "line": 21,
+      "startTime": "2025-12-15T13:36:23.915Z",
+      "retries": 0
+    },
+    {
+      "testId": "d2ea609703bae19dcdce-a18d90f109ebd7c5c07d",
+      "name": "Report sharing via email works",
+      "fullTitle": " > chromium > reports.spec.ts > Report Generation > Report sharing via email works",
+      "status": "passed",
+      "duration": 528,
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Reporting",
+        "suite": "Distribution",
+        "subSuite": "E2E",
+        "description": "Verifies reports can be shared via email with attachments.",
+        "tags": [
+          "reports",
+          "email",
+          "integration"
+        ],
+        "severity": "critical",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/reports.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:23.937Z",
+      "retries": 0
+    },
+    {
+      "testId": "43a5413b2d4cd77ef4f1-79037ee3150f43b47ed3",
+      "name": "Bulk user import from CSV",
+      "fullTitle": " > chromium > user-management.spec.ts > User Management > Bulk user import from CSV",
+      "status": "skipped",
+      "duration": 0,
+      "metadata": {
+        "epic": "Administration",
+        "feature": "User Management",
+        "suite": "User CRUD",
+        "subSuite": "E2E",
+        "description": "Verifies bulk user import correctly processes CSV files.",
+        "tags": [
+          "admin",
+          "import"
+        ],
+        "severity": "normal",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/user-management.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:24.471Z",
+      "retries": 0
+    },
+    {
+      "testId": "d877ffdf71ec720167ae-ce2e4c819481624d70b3",
+      "name": "Theme preference persists across sessions",
+      "fullTitle": " > chromium > settings.spec.ts > Application Settings > Theme preference persists across sessions",
+      "status": "passed",
+      "duration": 526,
+      "metadata": {
+        "epic": "User Experience",
+        "feature": "Settings",
+        "suite": "User Preferences",
+        "subSuite": "E2E",
+        "description": "Verifies selected theme (dark/light) persists after logout/login.",
+        "tags": [
+          "settings",
+          "theme",
+          "ui"
+        ],
+        "severity": "minor",
+        "owner": "Emma",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/settings.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:23.946Z",
+      "retries": 0
+    },
+    {
+      "testId": "d877ffdf71ec720167ae-836b35204bc6bc6638c2",
+      "name": "Language selection changes all UI text",
+      "fullTitle": " > chromium > settings.spec.ts > Application Settings > Language selection changes all UI text",
+      "status": "passed",
+      "duration": 509,
+      "metadata": {
+        "epic": "User Experience",
+        "feature": "Settings",
+        "suite": "Localization",
+        "subSuite": "E2E",
+        "description": "Verifies language change updates all UI elements correctly.",
+        "tags": [
+          "settings",
+          "i18n",
+          "ui"
+        ],
+        "severity": "normal",
+        "owner": "Marcus",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/settings.spec.ts",
+      "line": 22,
+      "startTime": "2025-12-15T13:36:23.982Z",
+      "retries": 0
+    },
+    {
+      "testId": "be7d0958780d1a4666e5-10c01a2753f14d9dfc46",
+      "name": "Email notifications are triggered correctly",
+      "fullTitle": " > chromium > notifications.spec.ts > Notifications > Email notifications are triggered correctly",
+      "status": "failed",
+      "duration": 555,
+      "errorTrace": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\nError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/notifications.spec.ts:55:19",
+      "metadata": {
+        "epic": "Workflow",
+        "feature": "Notifications",
+        "suite": "Email Delivery",
+        "subSuite": "E2E",
+        "description": "Verifies email notifications are sent for configured events.",
+        "tags": [
+          "notifications",
+          "email",
+          "integration"
+        ],
+        "severity": "critical",
+        "owner": "Quentin",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/notifications.spec.ts",
+      "line": 39,
+      "startTime": "2025-12-15T13:36:23.845Z",
+      "retries": 0
+    },
+    {
+      "testId": "d877ffdf71ec720167ae-66e1d1f425d7030411c0",
+      "name": "Timezone setting affects all date displays",
+      "fullTitle": " > chromium > settings.spec.ts > Application Settings > Timezone setting affects all date displays",
+      "status": "passed",
+      "duration": 521,
+      "metadata": {
+        "epic": "User Experience",
+        "feature": "Settings",
+        "suite": "User Preferences",
+        "subSuite": "E2E",
+        "description": "Verifies timezone preference correctly adjusts all timestamps.",
+        "tags": [
+          "settings",
+          "timezone"
+        ],
+        "severity": "normal",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/settings.spec.ts",
+      "line": 40,
+      "startTime": "2025-12-15T13:36:24.130Z",
+      "retries": 0
+    },
+    {
+      "testId": "43a5413b2d4cd77ef4f1-6baa8ac3d56ebc071760",
+      "name": "Admin can create new user account",
+      "fullTitle": " > chromium > user-management.spec.ts > User Management > Admin can create new user account",
+      "status": "passed",
+      "duration": 535,
+      "metadata": {
+        "epic": "Administration",
+        "feature": "User Management",
+        "suite": "User CRUD",
+        "subSuite": "E2E",
+        "description": "Verifies admin users can successfully create new user accounts.",
+        "tags": [
+          "admin",
+          "users",
+          "ui"
+        ],
+        "severity": "blocker",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/user-management.spec.ts",
+      "line": 4,
+      "startTime": "2025-12-15T13:36:24.424Z",
+      "retries": 0
+    },
+    {
+      "testId": "43a5413b2d4cd77ef4f1-3231c56091301faaf732",
+      "name": "User roles restrict access appropriately",
+      "fullTitle": " > chromium > user-management.spec.ts > User Management > User roles restrict access appropriately",
+      "status": "passed",
+      "duration": 584,
+      "metadata": {
+        "epic": "Security",
+        "feature": "User Management",
+        "suite": "Access Control",
+        "subSuite": "E2E",
+        "description": "Verifies user role permissions are enforced correctly.",
+        "tags": [
+          "security",
+          "rbac"
+        ],
+        "severity": "blocker",
+        "owner": "Sarah",
+        "parentSuite": ""
+      },
+      "filePath": "/Users/titus/Documents/GitHub Repos/Craft-Test-Report/example/tests/user-management.spec.ts",
+      "line": 22,
+      "startTime": "2025-12-15T13:36:24.434Z",
       "retries": 0
     }
   ],

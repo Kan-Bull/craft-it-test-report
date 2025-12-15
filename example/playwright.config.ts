@@ -16,7 +16,7 @@ export default defineConfig({
       outputFile: 'report.html',
       title: 'EDC Test Report',
       open: false,
-      logo: '../images/Craftit-monogram.png'
+      logo: '/Users/titus/Documents/GitHub Repos/Craft-Test-Report/images/Craftit-monogram.png'
     }]
   ],
 
