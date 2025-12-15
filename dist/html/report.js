@@ -118,11 +118,12 @@
     tbody.innerHTML = tests.map(test => {
       const testFileId = getTestFileId(test.filePath);
       const cleanErrorTrace = stripAnsiCodes(test.errorTrace || '');
+      const retryBadge = test.retries > 0 ? `<span class="retry-badge">↻ ${test.retries} ${test.retries === 1 ? 'retry' : 'retries'}</span>` : '';
 
       return `
       <tr class="test-row" data-test-id="${escapeHtml(test.testId)}">
         <td>
-          <span class="status-badge status-${test.status}">${test.status}</span>
+          <span class="status-badge status-${test.status}">${test.status}</span>${retryBadge}
         </td>
         <td>
           <div class="test-name">${escapeHtml(test.name)}</div>

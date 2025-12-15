@@ -1,6 +1,6 @@
 {
   "name": "craft-it-test-report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Custom Playwright test reporter with HTML reports and PDF export",
   "main": "dist/reporter/craft-reporter.js",
   "types": "dist/index.d.ts",
@@ -27,6 +27,7 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^12.1.0",
     "puppeteer": "^23.10.1"
   },

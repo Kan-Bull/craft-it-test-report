@@ -265,6 +265,18 @@ body {
 .status-timedOut { background: #fee2e2; color: var(--color-failed); }
 .status-skipped { background: #fef3c7; color: var(--color-skipped); }
 
+/* Retry Badge */
+.retry-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 6px;
+  background: #fef3c7;
+  color: #d97706;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
 /* Test Name */
 .test-name {
   font-weight: 500;

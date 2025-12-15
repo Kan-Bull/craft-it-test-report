@@ -8,6 +8,7 @@ import type {
 } from '@playwright/test/reporter';
 import * as fs from 'fs';
 import * as path from 'path';
+import chalk from 'chalk';
 import { TestEntry, ReportData, TestMetadata, ReporterOptions } from '../types';
 
 class CraftReporter implements Reporter {
@@ -30,7 +31,11 @@ class CraftReporter implements Reporter {
   onBegin(_config: FullConfig, suite: Suite): void {
     this.startTime = new Date();
     const totalTests = suite.allTests().length;
-    console.log(`\n[CraftReporter] Starting test run with ${totalTests} tests`);
+    console.log('');
+    console.log(chalk.cyan('┌─────────────────────────────────────────────────────────────┐'));
+    console.log(chalk.cyan('│') + chalk.bold.white('  🧪 Craft Test Report                                       ') + chalk.cyan('│'));
+    console.log(chalk.cyan('└─────────────────────────────────────────────────────────────┘'));
+    console.log(chalk.gray(`  Running ${chalk.white.bold(totalTests)} tests...\n`));
   }
 
   onTestEnd(test: TestCase, result: TestResult): void {
@@ -58,9 +63,26 @@ class CraftReporter implements Reporter {
       this.tests.push(entry);
     }
 
-    // Log progress
-    const statusSymbol = result.status === 'passed' ? '✓' : result.status === 'failed' ? '✗' : '○';
-    console.log(`  ${statusSymbol} ${test.title}`);
+    // Log progress with colors
+    const retryInfo = result.retry > 0 ? chalk.gray(` (retry #${result.retry})`) : '';
+    const duration = chalk.gray(` ${(result.duration / 1000).toFixed(1)}s`);
+
+    let output: string;
+    switch (result.status) {
+      case 'passed':
+        output = `  ${chalk.green('✓')} ${chalk.green(test.title)}${retryInfo}${duration}`;
+        break;
+      case 'failed':
+      case 'timedOut':
+        output = `  ${chalk.red('✗')} ${chalk.red(test.title)}${retryInfo}${duration}`;
+        break;
+      case 'skipped':
+        output = `  ${chalk.yellow('○')} ${chalk.yellow(test.title)}${retryInfo}${duration}`;
+        break;
+      default:
+        output = `  ${chalk.gray('?')} ${chalk.gray(test.title)}${retryInfo}${duration}`;
+    }
+    console.log(output);
   }
 
   private extractMetadata(test: TestCase): TestMetadata {
@@ -170,14 +192,23 @@ class CraftReporter implements Reporter {
     const jsonPath = path.join(this.outputDir, 'report-data.json');
     fs.writeFileSync(jsonPath, JSON.stringify(reportData, null, 2));
 
-    // Summary
-    console.log(`\n[CraftReporter] Test run completed: ${result.status}`);
-    console.log(`  Total: ${reportData.totalTests}`);
-    console.log(`  Passed: ${reportData.passed}`);
-    console.log(`  Failed: ${reportData.failed}`);
-    console.log(`  Skipped: ${reportData.skipped}`);
-    console.log(`  Duration: ${(duration / 1000).toFixed(2)}s`);
-    console.log(`\n[CraftReporter] Report generated: ${path.join(this.outputDir, this.options.outputFile)}`);
+    // Summary with colors
+    console.log('');
+    console.log(chalk.cyan('┌─────────────────────────────────────────────────────────────┐'));
+    console.log(chalk.cyan('│') + chalk.bold.white('  📊 Test Results                                            ') + chalk.cyan('│'));
+    console.log(chalk.cyan('└─────────────────────────────────────────────────────────────┘'));
+
+    const statusIcon = result.status === 'passed' ? chalk.green('✓') : chalk.red('✗');
+    const statusText = result.status === 'passed' ? chalk.green.bold('PASSED') : chalk.red.bold('FAILED');
+    console.log(`  ${statusIcon} Status:   ${statusText}`);
+    console.log(`  📋 Total:    ${chalk.white.bold(reportData.totalTests)}`);
+    console.log(`  ${chalk.green('✓')} Passed:   ${chalk.green.bold(reportData.passed)}`);
+    console.log(`  ${chalk.red('✗')} Failed:   ${chalk.red.bold(reportData.failed)}`);
+    console.log(`  ${chalk.yellow('○')} Skipped:  ${chalk.yellow.bold(reportData.skipped)}`);
+    console.log(`  ⏱️  Duration: ${chalk.white.bold((duration / 1000).toFixed(2) + 's')}`);
+    console.log('');
+    console.log(chalk.cyan('  📄 Report: ') + chalk.underline.white(path.join(this.outputDir, this.options.outputFile)));
+    console.log('');
 
     // Open in browser if requested
     if (this.options.open) {

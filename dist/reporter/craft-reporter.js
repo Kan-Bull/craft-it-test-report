@@ -32,9 +32,13 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
+const chalk_1 = __importDefault(require("chalk"));
 class CraftReporter {
     constructor(options = {}) {
         this.tests = [];
@@ -51,7 +55,11 @@ class CraftReporter {
     onBegin(_config, suite) {
         this.startTime = new Date();
         const totalTests = suite.allTests().length;
-        console.log(`\n[CraftReporter] Starting test run with ${totalTests} tests`);
+        console.log('');
+        console.log(chalk_1.default.cyan('┌─────────────────────────────────────────────────────────────┐'));
+        console.log(chalk_1.default.cyan('│') + chalk_1.default.bold.white('  🧪 Craft Test Report                                       ') + chalk_1.default.cyan('│'));
+        console.log(chalk_1.default.cyan('└─────────────────────────────────────────────────────────────┘'));
+        console.log(chalk_1.default.gray(`  Running ${chalk_1.default.white.bold(totalTests)} tests...\n`));
     }
     onTestEnd(test, result) {
         const metadata = this.extractMetadata(test);
@@ -76,9 +84,25 @@ class CraftReporter {
         else {
             this.tests.push(entry);
         }
-        // Log progress
-        const statusSymbol = result.status === 'passed' ? '✓' : result.status === 'failed' ? '✗' : '○';
-        console.log(`  ${statusSymbol} ${test.title}`);
+        // Log progress with colors
+        const retryInfo = result.retry > 0 ? chalk_1.default.gray(` (retry #${result.retry})`) : '';
+        const duration = chalk_1.default.gray(` ${(result.duration / 1000).toFixed(1)}s`);
+        let output;
+        switch (result.status) {
+            case 'passed':
+                output = `  ${chalk_1.default.green('✓')} ${chalk_1.default.green(test.title)}${retryInfo}${duration}`;
+                break;
+            case 'failed':
+            case 'timedOut':
+                output = `  ${chalk_1.default.red('✗')} ${chalk_1.default.red(test.title)}${retryInfo}${duration}`;
+                break;
+            case 'skipped':
+                output = `  ${chalk_1.default.yellow('○')} ${chalk_1.default.yellow(test.title)}${retryInfo}${duration}`;
+                break;
+            default:
+                output = `  ${chalk_1.default.gray('?')} ${chalk_1.default.gray(test.title)}${retryInfo}${duration}`;
+        }
+        console.log(output);
     }
     extractMetadata(test) {
         const metadata = {};
@@ -176,14 +200,22 @@ class CraftReporter {
         // Save JSON data
         const jsonPath = path.join(this.outputDir, 'report-data.json');
         fs.writeFileSync(jsonPath, JSON.stringify(reportData, null, 2));
-        // Summary
-        console.log(`\n[CraftReporter] Test run completed: ${result.status}`);
-        console.log(`  Total: ${reportData.totalTests}`);
-        console.log(`  Passed: ${reportData.passed}`);
-        console.log(`  Failed: ${reportData.failed}`);
-        console.log(`  Skipped: ${reportData.skipped}`);
-        console.log(`  Duration: ${(duration / 1000).toFixed(2)}s`);
-        console.log(`\n[CraftReporter] Report generated: ${path.join(this.outputDir, this.options.outputFile)}`);
+        // Summary with colors
+        console.log('');
+        console.log(chalk_1.default.cyan('┌─────────────────────────────────────────────────────────────┐'));
+        console.log(chalk_1.default.cyan('│') + chalk_1.default.bold.white('  📊 Test Results                                            ') + chalk_1.default.cyan('│'));
+        console.log(chalk_1.default.cyan('└─────────────────────────────────────────────────────────────┘'));
+        const statusIcon = result.status === 'passed' ? chalk_1.default.green('✓') : chalk_1.default.red('✗');
+        const statusText = result.status === 'passed' ? chalk_1.default.green.bold('PASSED') : chalk_1.default.red.bold('FAILED');
+        console.log(`  ${statusIcon} Status:   ${statusText}`);
+        console.log(`  📋 Total:    ${chalk_1.default.white.bold(reportData.totalTests)}`);
+        console.log(`  ${chalk_1.default.green('✓')} Passed:   ${chalk_1.default.green.bold(reportData.passed)}`);
+        console.log(`  ${chalk_1.default.red('✗')} Failed:   ${chalk_1.default.red.bold(reportData.failed)}`);
+        console.log(`  ${chalk_1.default.yellow('○')} Skipped:  ${chalk_1.default.yellow.bold(reportData.skipped)}`);
+        console.log(`  ⏱️  Duration: ${chalk_1.default.white.bold((duration / 1000).toFixed(2) + 's')}`);
+        console.log('');
+        console.log(chalk_1.default.cyan('  📄 Report: ') + chalk_1.default.underline.white(path.join(this.outputDir, this.options.outputFile)));
+        console.log('');
         // Open in browser if requested
         if (this.options.open) {
             const reportPath = path.join(this.outputDir, this.options.outputFile);
