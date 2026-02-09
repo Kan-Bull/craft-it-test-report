@@ -398,6 +398,15 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+/* Section Headings (hidden on screen, visible only in print when activated) */
+.section-heading {
+  display: none;
+}
+
+.print-only {
+  display: none;
+}
+
 /* Footer */
 .footer {
   margin-top: 24px;
@@ -554,6 +563,26 @@ body {
   .footer {
     font-size: 9px;
     margin-top: 10px;
+  }
+
+  /* Section headings - only visible when show-section-headings is set */
+  .show-section-headings .section-heading {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 8px 0;
+    color: var(--color-text);
+  }
+
+  /* Print-only sections become visible when activated */
+  .print-only.print-active {
+    display: block !important;
+  }
+
+  /* Atomics section starts on a new page */
+  #print-atomics-section {
+    page-break-before: always;
   }
 
   /* Force all columns visible in print (override responsive hiding) */

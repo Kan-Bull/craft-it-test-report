@@ -188,11 +188,8 @@
     });
   }
 
-  function renderTests(tests) {
-    const tbody = document.getElementById('tests-body');
-    if (!tbody) return;
-
-    tbody.innerHTML = tests.map(test => {
+  function buildTestRowsHTML(tests) {
+    return tests.map(test => {
       const testFileId = getTestFileId(test.filePath);
       const cleanErrorTrace = stripAnsiCodes(test.errorTrace || '');
       const retryBadge = test.retries > 0 ? `<span class="retry-badge">↻ ${test.retries} ${test.retries === 1 ? 'retry' : 'retries'}</span>` : '';
@@ -232,6 +229,12 @@
         </td>
       </tr>
     `}).join('');
+  }
+
+  function renderTests(tests) {
+    const tbody = document.getElementById('tests-body');
+    if (!tbody) return;
+    tbody.innerHTML = buildTestRowsHTML(tests);
 
     // Add change listeners to comment fields
     tbody.querySelectorAll('.comment-field').forEach(field => {
@@ -341,33 +344,73 @@
   }
 
   function exportPDF() {
-    // Update comments before print
-    document.querySelectorAll('.comment-field').forEach(field => {
-      const testId = field.dataset.testId;
-      const value = field.value.trim();
-      currentComments[testId] = value;
+    // Save current state
+    const savedTab = activeTab;
+    const savedSearch = document.getElementById('search')?.value || '';
+    const savedStatus = document.getElementById('status-filter')?.value || 'all';
+    const savedSeverity = document.getElementById('severity-filter')?.value || 'all';
+    const savedEpic = document.getElementById('epic-filter')?.value || 'all';
 
-      // Mark empty comments for hiding in print
-      if (!value) {
-        field.classList.add('empty-comment');
-      } else {
-        field.classList.remove('empty-comment');
-      }
-    });
+    // Compute test subsets (ignore filters - PDF shows all tests)
+    const allTests = REPORT_DATA.tests;
+    const e2eTests = allTests.filter(t => (t.metadata.suite || '').toUpperCase() !== 'ATOMICS');
+    const atomicsTests = allTests.filter(t => (t.metadata.suite || '').toUpperCase() === 'ATOMICS');
+    const hasBothSections = e2eTests.length > 0 && atomicsTests.length > 0;
 
-    // Expand all errors for PDF
+    // Update summary and chart to global (all tests)
+    updateSummary(allTests);
+    updateChart(allTests);
+
+    // Render E2E tests into the primary table
+    document.getElementById('tests-body').innerHTML = buildTestRowsHTML(e2eTests);
+
+    // Show section headings only when both sections have tests
+    if (hasBothSections) {
+      document.body.classList.add('show-section-headings');
+    }
+
+    // Render Atomics section if there are atomics tests
+    const atomicsSection = document.getElementById('print-atomics-section');
+    const atomicsBody = document.getElementById('print-atomics-body');
+    if (atomicsTests.length > 0 && atomicsBody && atomicsSection) {
+      atomicsBody.innerHTML = buildTestRowsHTML(atomicsTests);
+      atomicsSection.classList.add('print-active');
+    }
+
+    // Expand all errors and mark empty comments (both tables)
     document.querySelectorAll('.error-content').forEach(el => {
       el.style.display = 'block';
     });
     document.querySelectorAll('.error-toggle').forEach(el => {
       el.style.display = 'none';
     });
+    document.querySelectorAll('.comment-field').forEach(field => {
+      if (!field.value.trim()) {
+        field.classList.add('empty-comment');
+      } else {
+        field.classList.remove('empty-comment');
+      }
+    });
 
-    // Trigger print dialog
-    window.print();
+    // Restore function
+    function restore() {
+      // Restore active tab state
+      activeTab = savedTab;
 
-    // Restore after short delay
-    setTimeout(() => {
+      // Re-render active tab's tests (also re-attaches comment listeners)
+      const tabTests = getTabTests();
+      renderTests(tabTests);
+      updateSummary(tabTests);
+      updateChart(tabTests);
+
+      // Clear and hide the print-only Atomics section
+      if (atomicsBody) atomicsBody.innerHTML = '';
+      if (atomicsSection) atomicsSection.classList.remove('print-active');
+
+      // Remove show-section-headings class
+      document.body.classList.remove('show-section-headings');
+
+      // Restore error toggles
       document.querySelectorAll('.error-content').forEach(el => {
         el.style.display = 'none';
       });
@@ -375,11 +418,36 @@
         el.style.display = 'inline';
         el.textContent = 'Show error';
       });
+
       // Remove empty-comment class
       document.querySelectorAll('.comment-field').forEach(field => {
         field.classList.remove('empty-comment');
       });
-    }, 1000);
+
+      // Restore filters
+      const search = document.getElementById('search');
+      if (search) search.value = savedSearch;
+      const statusFilter = document.getElementById('status-filter');
+      if (statusFilter) statusFilter.value = savedStatus;
+      const severityFilter = document.getElementById('severity-filter');
+      if (severityFilter) severityFilter.value = savedSeverity;
+      const epicFilter = document.getElementById('epic-filter');
+      if (epicFilter) epicFilter.value = savedEpic;
+
+      // If filters were active, re-apply them
+      if (savedSearch || savedStatus !== 'all' || savedSeverity !== 'all' || savedEpic !== 'all') {
+        filterTests();
+      }
+    }
+
+    // Use afterprint event for reliable restore
+    window.addEventListener('afterprint', function onAfterPrint() {
+      window.removeEventListener('afterprint', onAfterPrint);
+      restore();
+    });
+
+    // Trigger print dialog
+    window.print();
   }
 
   // Utility functions
