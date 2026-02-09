@@ -162,6 +162,50 @@ body {
 .stat-duration { background: #e0e7ff; }
 .stat-duration .stat-value { color: #4f46e5; }
 
+/* Tab Bar */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  padding: 0 24px;
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.tab-btn {
+  padding: 14px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.tab-btn.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tab-btn:hover:not(.active) {
+  background: #f8fafc;
+  color: var(--color-text);
+}
+
+.tab-btn .tab-count {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-left: 4px;
+}
+
+.tab-btn.active .tab-count {
+  color: inherit;
+}
+
 /* Filters */
 .filters {
   margin-bottom: 24px;
@@ -379,7 +423,8 @@ body {
 
   .header-actions,
   .filters,
-  .error-toggle {
+  .error-toggle,
+  .tab-bar {
     display: none !important;
   }
 
@@ -544,6 +589,17 @@ body {
   .header-actions {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .tab-bar {
+    gap: 0;
+    padding: 0;
+  }
+
+  .tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 16px;
   }
 
   .filter-row {

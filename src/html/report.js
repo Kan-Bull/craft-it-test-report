@@ -6,9 +6,21 @@
   // State
   let currentComments = {};
   let chart = null;
+  let activeTab = 'E2E';
 
   // Initialize on DOM ready
   document.addEventListener('DOMContentLoaded', init);
+
+  function getTabTests() {
+    return REPORT_DATA.tests.filter(test => {
+      const suite = (test.metadata.suite || '').toUpperCase();
+      if (activeTab === 'ATOMICS') {
+        return suite === 'ATOMICS';
+      }
+      // E2E tab includes E2E tests AND any unclassified tests
+      return suite !== 'ATOMICS';
+    });
+  }
 
   function init() {
     if (!REPORT_DATA) {
@@ -19,42 +31,52 @@
     // Load comments from report data
     currentComments = { ...REPORT_DATA.comments };
 
-    // Render UI
-    renderSummary();
-    initChart();
-    populateEpicFilter();
-    renderTests(REPORT_DATA.tests);
+    // Set timestamp (report-level, not tab-level)
+    const timestamp = new Date(REPORT_DATA.timestamp).toLocaleString();
+    document.getElementById('report-timestamp').textContent = timestamp;
+    document.getElementById('footer-timestamp').textContent = timestamp;
+
+    // Update tab counts
+    updateTabCounts();
+
+    // Render UI for active tab
+    const tabTests = getTabTests();
+    updateSummary(tabTests);
+    initChart(tabTests);
+    populateEpicFilter(tabTests);
+    renderTests(tabTests);
 
     // Setup event listeners
     setupEventListeners();
   }
 
-  function renderSummary() {
-    const data = REPORT_DATA;
+  function updateSummary(tests) {
+    const passed = tests.filter(t => t.status === 'passed').length;
+    const failed = tests.filter(t => t.status === 'failed' || t.status === 'timedOut').length;
+    const skipped = tests.filter(t => t.status === 'skipped').length;
+    const duration = tests.reduce((sum, t) => sum + t.duration, 0);
 
-    document.getElementById('total-count').textContent = data.totalTests;
-    document.getElementById('passed-count').textContent = data.passed;
-    document.getElementById('failed-count').textContent = data.failed;
-    document.getElementById('skipped-count').textContent = data.skipped;
-    document.getElementById('duration-value').textContent = formatDuration(data.duration);
-
-    const timestamp = new Date(data.timestamp).toLocaleString();
-    document.getElementById('report-timestamp').textContent = timestamp;
-    document.getElementById('footer-timestamp').textContent = timestamp;
+    document.getElementById('total-count').textContent = tests.length;
+    document.getElementById('passed-count').textContent = passed;
+    document.getElementById('failed-count').textContent = failed;
+    document.getElementById('skipped-count').textContent = skipped;
+    document.getElementById('duration-value').textContent = formatDuration(duration);
   }
 
-  function initChart() {
+  function initChart(tests) {
     const ctx = document.getElementById('results-chart');
     if (!ctx) return;
 
-    const data = REPORT_DATA;
+    const passed = tests.filter(t => t.status === 'passed').length;
+    const failed = tests.filter(t => t.status === 'failed' || t.status === 'timedOut').length;
+    const skipped = tests.filter(t => t.status === 'skipped').length;
 
     chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: ['Passed', 'Failed', 'Skipped'],
         datasets: [{
-          data: [data.passed, data.failed, data.skipped],
+          data: [passed, failed, skipped],
           backgroundColor: ['#10b981', '#ef4444', '#f59e0b'],
           borderWidth: 0
         }]
@@ -94,15 +116,70 @@
     });
   }
 
-  function populateEpicFilter() {
+  function updateChart(tests) {
+    if (!chart) return;
+    const passed = tests.filter(t => t.status === 'passed').length;
+    const failed = tests.filter(t => t.status === 'failed' || t.status === 'timedOut').length;
+    const skipped = tests.filter(t => t.status === 'skipped').length;
+    chart.data.datasets[0].data = [passed, failed, skipped];
+    chart.update('none');
+  }
+
+  function updateTabCounts() {
+    const e2eCount = REPORT_DATA.tests.filter(t => {
+      const suite = (t.metadata.suite || '').toUpperCase();
+      return suite !== 'ATOMICS';
+    }).length;
+    const atomicsCount = REPORT_DATA.tests.filter(t => {
+      const suite = (t.metadata.suite || '').toUpperCase();
+      return suite === 'ATOMICS';
+    }).length;
+
+    document.querySelector('[data-tab="E2E"]').innerHTML =
+      'E2E <span class="tab-count">(' + e2eCount + ')</span>';
+    document.querySelector('[data-tab="ATOMICS"]').innerHTML =
+      'Atomics <span class="tab-count">(' + atomicsCount + ')</span>';
+  }
+
+  function switchTab(tab) {
+    activeTab = tab;
+
+    // Update tab button active state
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+
+    // Reset filters
+    const search = document.getElementById('search');
+    if (search) search.value = '';
+    const statusFilter = document.getElementById('status-filter');
+    if (statusFilter) statusFilter.value = 'all';
+    const severityFilter = document.getElementById('severity-filter');
+    if (severityFilter) severityFilter.value = 'all';
+
+    // Refresh view
+    const tabTests = getTabTests();
+    updateSummary(tabTests);
+    updateChart(tabTests);
+    populateEpicFilter(tabTests);
+    renderTests(tabTests);
+  }
+
+  function populateEpicFilter(tests) {
     const epics = new Set();
-    REPORT_DATA.tests.forEach(test => {
+    tests.forEach(test => {
       if (test.metadata.epic) {
         epics.add(test.metadata.epic);
       }
     });
 
     const select = document.getElementById('epic-filter');
+    // Clear existing options except "All Epics"
+    while (select.options.length > 1) {
+      select.remove(1);
+    }
+    select.value = 'all';
+
     epics.forEach(epic => {
       const option = document.createElement('option');
       option.value = epic;
@@ -217,6 +294,11 @@
     if (exportBtn) {
       exportBtn.addEventListener('click', exportPDF);
     }
+
+    // Tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
   }
 
   function filterTests() {
@@ -225,7 +307,7 @@
     const severityFilter = document.getElementById('severity-filter')?.value || 'all';
     const epicFilter = document.getElementById('epic-filter')?.value || 'all';
 
-    const filtered = REPORT_DATA.tests.filter(test => {
+    const filtered = getTabTests().filter(test => {
       // Search match
       const searchMatch = !searchTerm ||
         test.name.toLowerCase().includes(searchTerm) ||
